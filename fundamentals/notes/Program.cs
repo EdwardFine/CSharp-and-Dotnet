@@ -103,3 +103,44 @@ static void sayHello(){
 }
 
 sayHello();
+
+//User Input
+
+Console.WriteLine("Type something, then hit enter: ");
+string inputLine = Console.ReadLine();
+Console.WriteLine($"You wrote {inputLine}");
+
+//Converting Values
+string aNumber = "7";
+int convertedInt = Convert.ToInt32(aNumber);
+Console.WriteLine(14+convertedInt);
+
+string aDecimal = "3.14";
+double convertedDec = Convert.ToDouble(aDecimal);
+Console.WriteLine(1.8 + convertedDec);
+
+Console.WriteLine("Type a number, then hit enter: ");
+string numberInput = Console.ReadLine();
+if(Int32.TryParse(numberInput,out int j)){
+    Console.WriteLine($"The integer was {j}");
+    Console.WriteLine(10+j);
+}
+
+//Implicit Casting
+int integerValue = 3;
+double doubleValue = integerValue;
+
+//Explicit Casting
+double doubleValue2 = 3.14;
+int integerValue2 = (int)doubleValue2;
+
+//Unboxing
+object boxedData = "This is clearly a String";
+if(boxedData is int){
+    Console.WriteLine("I guess we have an integer value in this box?");
+}else if(boxedData is string){
+    Console.WriteLine("It is totally a string in the box!");
+}
+
+//Safe Explicit Value
+string explicitString = boxedData as string;
