@@ -24,8 +24,6 @@ int[] myArray2 = new int[] {1,2,3,4,5};
 int[] array3; 
 array3 = new int[] {1,3,5,7,9}; 
 
-
-
 //Still iterable
 Console.WriteLine(myArray[0]);
 
