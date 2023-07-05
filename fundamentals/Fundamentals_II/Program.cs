@@ -33,7 +33,7 @@ Dictionary<string,string> firstDictionary = new Dictionary<string, string>();
 Random rand = new Random();
 
 foreach(string name in secondArray){
-    firstDictionary[name] = firstList[rand.Next(0,4)];
+    firstDictionary.Add(name, firstList[rand.Next(0,4)]);
 }
 foreach(KeyValuePair<string,string> entry in firstDictionary){
     Console.WriteLine($"{entry.Key} likes {entry.Value} ice cream.");
