@@ -13,4 +13,10 @@ public class Animal{
         Type = t;
         Diet = d;
     }
+
+    public virtual void ShowInfo(){
+        Console.WriteLine($"Name: {Name}");
+        Console.WriteLine($"Type: {Type}");
+        Console.WriteLine($"Diet: {Diet}");
+    }
 }

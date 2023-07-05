@@ -7,3 +7,5 @@ Giraffe.Type = "Fish";
 Console.WriteLine(Giraffe.Type);
 
 Cat Merida = new Cat("Merida","Orange Tabby");
+
+Merida.ShowInfo();
