@@ -90,3 +90,16 @@ Console.WriteLine(myDictionary["Name"]);
 foreach(KeyValuePair<string,string> entry in myDictionary){
     Console.WriteLine($"{entry.Key} - {entry.Value}");
 }
+
+//Functions
+static int addNumbers(int a,int b){
+    return a + b;
+}
+
+Console.WriteLine(addNumbers(5,3));
+
+static void sayHello(){
+    Console.WriteLine("Hello, World!");
+}
+
+sayHello();
