@@ -1,0 +1,11 @@
+@model List<Pet>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-align-center">
+    <h1>Here are all the pets you ordered:</h1>
+    @{foreach(Pet p in Model){
+        <p>@p.Name the @p.Color @p.Species that is @p.Age year old that might be friendly: @p.IsFriendly</p>
+    }}
+</div>
