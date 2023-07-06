@@ -5,11 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>First Webpage</title>
+    <link rel="stylesheet" href="~/css/style.css">
 </head>
 
 <body>
     <h1>This is from the first C# Lecture</h1>
     <h3>Hello, @ViewBag.Name</h3>
+    <h3>My number is @ViewBag.Number</h3>
+    <h3>@ViewBag.Error</h3>
+    <form action="process" method="post">
+        <label for="favoriteAnimal">What is your favorite animal?</label>
+        <input type="text" name="favoriteAnimal">
+        <span>
+            @{
+                if(ViewBag.Error == null){
+                    <p></p>
+                }else{
+                    <p>@ViewBag.Error</p>
+                    <img src="~/image/puppy.jpg" alt="puppy" style="height: 150px;">
+                }
+            }
+        </span>
+        <button>Send</button>
+    </form>
 </body>
 
 </html>
