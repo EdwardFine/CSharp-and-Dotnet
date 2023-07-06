@@ -1,4 +1,4 @@
-public class Animal{
+public abstract class Animal{
     private string Name;
     public string Diet;
     public string Type {get;set;}
@@ -19,4 +19,6 @@ public class Animal{
         Console.WriteLine($"Type: {Type}");
         Console.WriteLine($"Diet: {Diet}");
     }
+
+    public abstract void MakeNoise();
 }

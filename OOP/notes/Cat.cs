@@ -9,4 +9,8 @@ public class Cat : Animal{
         base.ShowInfo();
         Console.WriteLine($"Fur Type: {FurType}");
     }
+    public override void MakeNoise()
+    {
+        Console.WriteLine("Meow");
+    }
 }

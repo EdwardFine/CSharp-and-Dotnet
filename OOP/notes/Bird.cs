@@ -13,4 +13,8 @@ public class Bird : Animal, ILayEggs{
     public void LayEggs(){
         Console.WriteLine($"{_Name} laid {EggsPerBatch} egg(s)");
     }
+    public override void MakeNoise()
+    {
+        Console.WriteLine("Tweet Tweet");
+    }
 }
