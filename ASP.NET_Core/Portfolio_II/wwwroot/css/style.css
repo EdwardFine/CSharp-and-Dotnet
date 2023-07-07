@@ -1,0 +1,12 @@
+.container{
+    width: 80%;
+    text-align: center;
+}
+.flex-center{
+    display: flex;
+    justify-content: center;
+}
+.flex-between{
+    display: flex;
+    justify-content: space-between;
+}
