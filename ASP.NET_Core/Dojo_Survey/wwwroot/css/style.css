@@ -1,0 +1,19 @@
+.flex{
+    display: flex;
+}.just-center{
+    justify-content: center;
+}
+.just-between{
+    justify-content: space-between;
+}
+.align-center{
+    align-items: center;
+}.just-end{
+    justify-content: flex-end;
+}
+.container{
+    width: 50%;
+    border: 2px solid black;
+    padding:2em;
+    margin-top: 2em;
+}

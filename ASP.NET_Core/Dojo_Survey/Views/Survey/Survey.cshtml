@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/style.css">
+    <title>Survey Results</title>
+</head>
+<body>
+    <div class="flex just-center">
+        <div class="container">
+            <h1><strong>Submitted Info</strong></h1><br>
+            <div class="flex just-between align-center" style="font-size: 1.5em;">
+                <p>Name:</p>
+                <p>@ViewBag.Name</p>
+            </div>
+            <div class="flex just-between align-center" style="font-size: 1.5em;">
+                <p>Location:</p>
+                <p>@ViewBag.Location</p>
+            </div>
+            <div class="flex just-between align-center" style="font-size: 1.5em;">
+                <p>Favorite Language:</p>
+                <p>@ViewBag.FavLanguage</p>
+            </div>
+            <div class="flex just-between align-center" style="font-size: 1.5em;">
+                <p>Comment:</p>
+                <p>@ViewBag.Comment</p>
+            </div>
+            <form action="/" class="flex just-end">
+                <button style="font-size: 2em; margin-top: 1em">Go Back</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
