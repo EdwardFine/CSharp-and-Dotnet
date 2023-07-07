@@ -15,12 +15,28 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        string localVariable = HttpContext.Session.GetString("UserName");
+        Console.WriteLine(localVariable);
         return View();
     }
 
     public IActionResult Privacy()
     {
+        if(HttpContext.Session.GetString("UserName")==null){
+            return RedirectToAction("Index");
+        }
         return View();
+    }
+
+    [HttpPost("login")]
+    public IActionResult Login(string NewName){
+        HttpContext.Session.SetString("UserName",NewName);
+        return RedirectToAction("Privacy");
+    }
+    [HttpPost("logout")]
+    public IActionResult Logout(){
+        HttpContext.Session.Clear();
+        return RedirectToAction("Privacy");
     }
 
     // [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

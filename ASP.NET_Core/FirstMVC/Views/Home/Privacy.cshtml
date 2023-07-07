@@ -2,5 +2,8 @@
     ViewData["Title"] = "Privacy Policy";
 }
 <h1>@ViewData["Title"]</h1>
-
+<h2>@Context.Session.GetString("UserName") @Context.Session.GetInt32("MyNum")</h2>
 <p>Use this page to detail your site's privacy policy.</p>
+<form action="/logout" method="post">
+    <button class="btn btn-outline-danger">Logout</button>
+</form>

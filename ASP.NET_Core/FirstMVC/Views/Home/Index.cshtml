@@ -33,4 +33,13 @@
     </div>
     <button class="btn btn-outline-dark">Submit</button>
     </form>
+<div class="mt-3" >
+    <h1>Session Demo:</h1>
+    <h2>Current UserName: @Context.Session.GetString("UserName")</h2>
+    <h3>My Session Number: @Context.Session.GetInt32("MyNum")</h3>
+    <form action="/login" method="post">
+    <input type="text" name="NewName" class="form-control">
+    <button class="btn btn-outline-info mt-2">Submit</button>
+    </form>
+</div>
 </div>
