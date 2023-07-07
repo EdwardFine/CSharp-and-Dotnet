@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/style.css">
+    <title>Countdown</title>
+</head>
+
+<body>
+    <div class="flex center">
+        <div class="container">
+            <div class="flex between" style="margin-top: 3em;">
+                <div class="date-box">
+                    Current Time <br>
+                    @ViewBag.CurrentDate.ToString("dddd, dd MMMM yyyy HH:mm tt")
+                </div>
+                <div class="date-box">
+                    Countdown To <br>
+                    @ViewBag.CountTo.ToString("dddd, dd MMMM yyyy HH:mm tt")
+                </div>
+            </div>
+            <div class="countdown">
+                @ViewBag.Wait.ToString("dd") Day(s), @ViewBag.Wait.ToString("hh") Hour(s), @ViewBag.Wait.ToString("mm") Minute(s), @ViewBag.Wait.ToString("ss") Second(s)<br>
+                Remaining
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

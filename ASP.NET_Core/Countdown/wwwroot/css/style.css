@@ -1,0 +1,23 @@
+.date-box{
+    border: 2px solid black;
+    font-size: 3em;
+    width: 10em;
+    text-align: center;
+}
+.container{
+    width: 80%;
+}
+.flex{
+    display: flex;
+}
+.center{
+    justify-content: center;
+}
+.between{
+    justify-content: space-between;
+}
+.countdown{
+    margin-top: 3em; 
+    text-align:center;
+    font-size: 4em;
+}
