@@ -1,0 +1,17 @@
+.flex{
+    display: flex;
+}.just-center{
+    justify-content: center;
+}
+.just-between{
+    justify-content: space-between;
+}
+.align-center{
+    align-items: center;
+}.just-end{
+    justify-content: flex-end;
+}
+.container{
+    padding:0 2em 0 2em;
+    margin-top: 2em;
+}

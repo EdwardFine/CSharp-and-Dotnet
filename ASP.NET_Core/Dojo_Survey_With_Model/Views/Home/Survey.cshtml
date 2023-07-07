@@ -1,0 +1,34 @@
+@{
+    ViewData["Title"] = "Survey";
+}
+@model Survey
+<div class="flex just-center">
+        <div class="container">
+            <h1><strong>Submitted Info</strong></h1><br>
+            <div class="flex just-between align-center" style="font-size: 1.5em;">
+                <p>Name:</p>
+                <p>@Model.Name</p>
+            </div>
+            <div class="flex just-between align-center" style="font-size: 1.5em;">
+                <p>Location:</p>
+                <p>@Model.Location</p>
+            </div>
+            <div class="flex just-between align-center" style="font-size: 1.5em;">
+                <p>Favorite Language:</p>
+                <p>@Model.FavLanguage</p>
+            </div>
+            <div class="flex just-between align-center" style="font-size: 1.5em;">
+                <p>Comment:</p>
+                @{
+                    if(Model.Comment == null){
+                        <p>No Comment</p>
+                    }else{
+                        <p>@Model.Comment</p>
+                    }
+                }
+            </div>
+            <form action="/" class="flex just-end">
+                <button style="font-size: 2em; margin-top: 1em">Go Back</button>
+            </form>
+        </div>
+    </div>
