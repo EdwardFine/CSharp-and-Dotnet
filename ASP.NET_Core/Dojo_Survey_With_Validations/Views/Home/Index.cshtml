@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model Survey
+
+<div class="container">
+    <form asp-action="Survey" method="post">
+        <div class="flex just-between align-center" style="font-size: 2em;">
+            <label asp-for="Name">Your Name:</label>
+            <input asp-for="Name" style="font-size: .75em;">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="flex just-between align-center" style="font-size: 2em;">
+            <label asp-for="Location">Location:</label>
+            <select asp-for="Location" style="font-size: 1em;">
+                <option value="" disabled selected>Select a Location</option>
+                <option value="Seattle">Seattle</option>
+                <option value="San Jose">San Jose</option>
+                <option value="Burbank">Burbank</option>
+                <option value="Other">Other</option>
+            </select>
+            <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+        <div class="flex just-between align-center" style="font-size: 2em;">
+            <label asp-for="Name">Your Name:</label>
+            <select asp-for="FavLanguage" style="font-size: 1em;">
+                <option value="" disabled selected>Select a Language</option>
+                <option value="C#">C#</option>
+                <option value="Python">Python</option>
+                <option value="Javascript">Javascript</option>
+                <option value="Other">Other</option>
+            </select>
+            <span asp-validation-for="FavLanguage" class="text-danger"></span>
+        </div>
+        <label asp-for="Comment" style="font-size: 2em;">Comment (Optional): </label><br>
+        <textarea asp-for="Comment" style="width: 100%; font-size:2em" rows="10"></textarea>
+        <span asp-validation-for="Comment" class="text-danger"></span>
+        <div class="flex just-end">
+            <button style="font-size: 2em; margin-top: 1em">Submit</button>
+        </div>
+    </form>
+</div>
