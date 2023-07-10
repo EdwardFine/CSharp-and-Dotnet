@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1>These are all games</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Rating</th>
+                <th>Genre</th>
+                <th>Platform(s)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+            foreach(Game g in ViewBag.AllGames){
+                <tr>
+                    <td>@g.Title</td>
+                    <td>$@g.Price</td>
+                    <td>@g.Rating</td>
+                    <td>@g.Genre</td>
+                    <td>@g.Platform</td>
+                </tr>
+            }
+            }
+        </tbody>
+    </table>
+    <h1>These are all PC games or T games</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Rating</th>
+                <th>Genre</th>
+                <th>Platform(s)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+            foreach(Game g in ViewBag.PCPlatform){
+                <tr>
+                    <td>@g.Title</td>
+                    <td>$@g.Price</td>
+                    <td>@g.Rating</td>
+                    <td>@g.Genre</td>
+                    <td>@g.Platform</td>
+                </tr>
+            }
+            }
+        </tbody>
+    </table>
+    <h1>This is One Game</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Rating</th>
+                <th>Genre</th>
+                <th>Platform(s)</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>@ViewBag.SingleGame.Title</td>
+                    <td>$@ViewBag.SingleGame.Price</td>
+                    <td>@ViewBag.SingleGame.Rating</td>
+                    <td>@ViewBag.SingleGame.Genre</td>
+                    <td>@ViewBag.SingleGame.Platform</td>
+                </tr>
+        </tbody>
+    </table>
+    
+</div>
