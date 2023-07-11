@@ -39,6 +39,10 @@ app.MapControllerRoute(
 
 app.Run();
 
+## Validations on Model
+
+using System.ComponentModel.DataAnnotations;
+
 ## appsettings.json - MySql
 
 "ConnectionStrings":    
@@ -55,3 +59,55 @@ dotnet add package Microsoft.EntityFrameworkCore.Design --version 6.0.3
 
 dotnet ef migrations add FirstMigration
 dotnet ef database update
+
+## Model
+
+#pragma warning disable CS8618
+using System.ComponentModel.DataAnnotations;
+namespace ProjectName.Models;
+
+public class Pet{
+    [Key]
+    public int PetId {get;set;}
+    public string Name {get;set;}
+    public string Type {get;set;}
+    public int Age {get;set;}
+    public bool HasFur {get;set;}
+    public DateTime CreatedAt {get;set;} = DateTime.Now;
+    public DateTime UpdatedAt {get;set;} = DateTime.Now;
+}
+
+## MyContext
+
+#pragma warning disable CS8618
+
+using Microsoft.EntityFrameworkCore;
+namespace ProjectName.Models;
+
+public class MyContext : DbContext 
+{   
+    public MyContext(DbContextOptions options) : base(options) { }      
+    public DbSet<Model> MyContext { get; set; } 
+}
+
+## Empty Controller
+
+using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using ProjectName.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace ProjectName.Controllers;
+
+public class Controller : Controller
+{
+    private readonly ILogger<Controller> _logger;
+    private MyContext db;
+
+    public Controller(ILogger<Controller> logger, MyContext context)
+    {
+        _logger = logger;
+        db = context;
+    }
+
+}

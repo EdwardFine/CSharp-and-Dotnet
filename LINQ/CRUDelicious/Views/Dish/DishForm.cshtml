@@ -1,0 +1,41 @@
+@{
+    ViewData["Title"] = "New Dish";
+}
+@model Dish
+<div class="text-center">
+    <h1 class="display-4">Create a New Dish!</h1>
+    <form class="shadow p-3 rounded" asp-controller="Dish" asp-action="CreateDish" method="post">
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control">
+            <span asp-validation-for="Name" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Chef"></label>
+            <input asp-for="Chef" class="form-control">
+            <span asp-validation-for="Chef" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Tastiness"></label>
+            <select asp-for="Tastiness">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <span asp-validation-for="Tastiness" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Calories"></label>
+            <input asp-for="Calories" class="form-control">
+            <span asp-validation-for="Calories" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control">
+            <span asp-validation-for="Description" class="text-danger font-weight-bold"></span>
+        </div>
+        <button class="btn btn-outline-danger">Create Dish</button>
+    </form>
+</div>

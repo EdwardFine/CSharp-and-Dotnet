@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using EntityFrameworkLecture.Models;
+using CRUDelicious.Models;
 
-namespace EntityFrameworkLecture.Controllers;
+namespace CRUDelicious.Controllers;
 
 public class HomeController : Controller
 {

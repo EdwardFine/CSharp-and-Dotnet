@@ -1,0 +1,34 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model List<Monster>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <a href="/monsters/new"><button class="btn btn-danger">Create New Monster</button></a>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Height</th>
+                <th>Description</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach(Monster m in Model){
+                    <tr>
+                        <td>@m.MonsterId</td>
+                        <td>@m.Name</td>
+                        <td>@m.Height</td>
+                        <td>@m.Description</td>
+                        <td>@m.CreatedAt</td>
+                        <td>@m.UpdatedAt0</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
