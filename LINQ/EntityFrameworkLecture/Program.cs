@@ -1,10 +1,5 @@
-## Create .Net ASP Project file
-dotnet new mvc --no-https -o ProjectName
-
-## Program.cs
-
 using Microsoft.EntityFrameworkCore;
-using ProjectName.Models;
+using EntityFrameworkLecture.Models;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -12,11 +7,8 @@ builder.Services.AddDbContext<MyContext>(options =>
 {
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddHttpContextAccessor();
-builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -31,27 +23,8 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.UseSession();
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
-
-## appsettings.json - MySql
-
-"ConnectionStrings":    
-    {        
-        "DefaultConnection": "Server=localhost;port=3306;userid=root;password=root;database=monsterdb;"    
-    }
-
-## MySql commands setup
-
-dotnet add package Pomelo.EntityFrameworkCore.MySql --version 6.0.1
-dotnet add package Microsoft.EntityFrameworkCore.Design --version 6.0.3
-
-## MySql Migration
-
-dotnet ef migrations add FirstMigration
-dotnet ef database update
