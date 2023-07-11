@@ -39,19 +39,28 @@ public class DishController : Controller
 
     [HttpGet("dishes/{id}")]
     public IActionResult DisplayDish(int id){
-        Dish OneDish = db.Dishes.FirstOrDefault(d=>d.DishId == id);
+        Dish? OneDish = db.Dishes.FirstOrDefault(d=>d.DishId == id);
+        if(OneDish==null){
+            return RedirectToAction("Index");
+        }
         return View("OneDish",OneDish);
     }
     
     [HttpGet("dishes/{id}/edit")]
     public IActionResult EditDish(int id){
         Dish? DishToEdit = db.Dishes.FirstOrDefault(d=>d.DishId == id);
+        if(DishToEdit==null){
+            return RedirectToAction("Index");
+        }
         return View("EditDish",DishToEdit);
     }
 
     [HttpPost("dishes/{id}/update")]
     public IActionResult UpdateDish(Dish UpdatedDish, int id){
         Dish? OldDish = db.Dishes.FirstOrDefault(d=>d.DishId == id);
+        if(OldDish==null){
+            return RedirectToAction("Index");
+        }
         if(!ModelState.IsValid){
             return View("EditDish",OldDish);
         }
@@ -68,6 +77,9 @@ public class DishController : Controller
     [HttpPost("dishes/{id}/delete")]
     public IActionResult DeleteDish(int id){
         Dish? DishToDel = db.Dishes.FirstOrDefault(d=>d.DishId == id);
+        if(DishToDel==null){
+            return RedirectToAction("Index");
+        }
         db.Dishes.Remove(DishToDel);
         db.SaveChanges();
         return RedirectToAction("Index");
