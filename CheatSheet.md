@@ -67,6 +67,7 @@ dotnet ef database update
 
 #pragma warning disable CS8618
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace ProjectName.Models;
 
 public class Pet{
@@ -172,6 +173,8 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ProjectName.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Identity;
 
 namespace ProjectName.Controllers;
 
@@ -189,6 +192,8 @@ public class Controller : Controller
 }
 
 ## Password Hasher
+
+using Microsoft.AspNetCore.Identity;
 
 PasswordHasher<Model> Hasher = new PasswordHasher<Model>();
 newModel.Password = Hasher.HashPassword(newModel, newModel.Password);
