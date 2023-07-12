@@ -69,13 +69,86 @@ namespace ProjectName.Models;
 public class Pet{
     [Key]
     public int PetId {get;set;}
+    [Required]
+    [MinLength(2)]
     public string Name {get;set;}
+    [MaxLength(20)]
     public string Type {get;set;}
+    [Range(0,20)]
     public int Age {get;set;}
     public bool HasFur {get;set;}
+    [Required]
+    [EmailAddress]
+    [UniqueEmail]
+    public string Email {get;set;}
+    [Required]
+    [DataType(DataType.Password)]
+    public string Password {get;set;}
     public DateTime CreatedAt {get;set;} = DateTime.Now;
     public DateTime UpdatedAt {get;set;} = DateTime.Now;
+    [NotMapped]
+    [Compare("Password")]
+    public string PasswordConfirm { get; set; }
 }
+
+## Validate Unique Email
+
+public class UniqueEmailAttribute : ValidationAttribute
+{
+    protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
+    {
+    	// Though we have Required as a validation, sometimes we make it here anyways
+    	// In which case we must first verify the value is not null before we proceed
+        if(value == null)
+        {
+    	    // If it was, return the required error
+            return new ValidationResult("Email is required!");
+        }
+    
+    	// This will connect us to our database since we are not in our Controller
+        MyContext _context = (MyContext)validationContext.GetService(typeof(MyContext));
+        // Check to see if there are any records of this email in our database
+    	if(_context.Users.Any(e => e.Email == value.ToString()))
+        {
+    	    // If yes, throw an error
+            return new ValidationResult("Email must be unique!");
+        } else {
+    	    // If no, proceed
+            return ValidationResult.Success;
+        }
+    }
+}
+
+## Session Security
+
+//Insert into top of Controller
+using Microsoft.AspNetCore.Mvc.Filters;
+
+//Insert into bottom of Cntroller
+// Name this anything you want with the word "Attribute" at the end
+public class SessionCheckAttribute : ActionFilterAttribute
+{
+    public override void OnActionExecuting(ActionExecutingContext context)
+    {
+        // Find the session, but remember it may be null so we need int?
+        int? userId = context.HttpContext.Session.GetInt32("UserId");
+        // Check to see if we got back null
+        if(userId == null)
+        {
+            // Redirect to the Index page if there was nothing in session
+            // "Home" here is referring to "HomeController", you can use any controller that is appropriate here
+            context.Result = new RedirectToActionResult("Index", "Home", null);
+        }
+    }
+}
+
+//Routing
+// The name we gave our class minus "Attribute"
+[SessionCheck]
+[HttpGet("someRoute")]
+// The rest of the code
+
+
 
 ## MyContext
 
@@ -111,3 +184,14 @@ public class Controller : Controller
     }
 
 }
+
+## Password Hasher
+
+PasswordHasher<Model> Hasher = new PasswordHasher<Model>();
+newModel.Password = Hasher.HashPassword(newModel, newModel.Password);
+
+## Compare Hashed Passwords
+
+PasswordHasher<Model> hasher = new PasswordHasher<Model>();
+var result = hasher.VerifyHashedPassword(modelSubmission, modelInDb.Password, modelSubmission.Password);
+// Result can be compared to 0 for failure
