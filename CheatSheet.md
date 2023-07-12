@@ -60,6 +60,9 @@ dotnet add package Microsoft.EntityFrameworkCore.Design --version 6.0.3
 dotnet ef migrations add FirstMigration
 dotnet ef database update
 
+## Loading Partials
+@await Html.PartialAsync("_Partial")
+
 ## Model
 
 #pragma warning disable CS8618
