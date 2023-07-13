@@ -95,6 +95,46 @@ public class Pet{
     public string PasswordConfirm { get; set; }
 }
 
+## One To Many Example
+
+#pragma warning disable CS8618
+namespace YourProjectName.Models;
+using System.ComponentModel.DataAnnotations;
+public class User
+{    
+    [Key]    
+    public int UserId { get; set; }       
+    public string Name { get; set; } 
+    public string Email { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime UpdatedAt { get; set; } = DateTime.Now;
+    // Our navigation property to track the many Posts our user has made
+    // Be sure to include the part about instantiating a new List!
+    public List<Post> AllPosts { get; set; } = new List<Post>();
+}
+
+#pragma warning disable CS8618
+namespace YourProjectName.Models;
+using System.ComponentModel.DataAnnotations;
+public class Post
+{    
+    [Key]    
+    public int PostId { get; set; }
+    public string Content { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime UpdatedAt { get; set; } = DateTime.Now;
+    public int UserId { get; set; }
+    // Our navigation property to track which User made this Post
+    // It is VERY important to include the ? on the datatype or this won't work!
+    public User? Creator { get; set; }
+}
+
+## .Include Linq
+
+//.Include is like a MySql JOIN
+List<Post> AllPosts = _context.Posts.Include(c => c.Creator).ToList();
+int numPosts = _context.Users.Include(user => user.AllPosts).FirstOrDefault(user => user.UserId == userId).AllPosts.Count;
+
 ## Validate Unique Email
 
 public class UniqueEmailAttribute : ValidationAttribute
