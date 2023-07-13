@@ -1,0 +1,53 @@
+@{
+    ViewData["Title"] = "Add Dish";
+}
+@model Dish
+
+<div class="text-center">
+    <h1>Add a Dish</h1>
+    <hr>
+    <form asp-action="CreateDish" asp-controller="Home"
+        class="d-flex justify-content-between align-items-center shaded p-3 rounded">
+        <div>
+            <div class="mb-3">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control">
+                <span asp-validation-for="Name" class="text-danger font-weight-bold"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Calories"></label>
+                <input asp-for="Calories" class="form-control">
+                <span asp-validation-for="Calories" class="text-danger font-weight-bold"></span>
+            </div>
+        </div>
+        <div>
+            <div class="mb-3">
+                <label asp-for="ChefId">Chef: </label> <br>
+                <select asp-for="ChefId" class="form-control">
+                    @{
+                        foreach (Chef c in ViewBag.AllChefs)
+                        {
+                            <option value="@c.ChefId">@c.FirstName @c.LastName</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="ChefId" class="text-danger font-weight-bold"></span>
+            </div>
+        </div>
+        <div>
+            <div class="mb-3">
+                <label asp-for="Tastiness"></label> <br>
+                <select asp-for="Tastiness" class="form-control">
+                    @{
+                        for (int i = 1; i <= 5; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="Tastiness" class="text-danger font-weight-bold"></span>
+            </div>
+            <button class="btn btn-primary">Add Dish</button>
+        </div>
+    </form>
+</div>
