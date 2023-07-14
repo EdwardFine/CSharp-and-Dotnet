@@ -1,0 +1,45 @@
+@model Catagory
+<div class="text-center">
+    <h1>@Model.Name</h1>
+    <div class="d-flex justify-content-evenly">
+        <div>
+            <h2>Products</h2>
+            <ul>
+                @{
+                    foreach(Association a in Model.Products){
+                        <li class="d-flex align-items-center mb-3 gap-2">@a.Product.Name | 
+                            <form asp-action="DeleteAssociationFromCat" asp-controller="Home" method="post">
+                            <input type="hidden" name="CatagoryId" value="@Model.CatagoryId">
+                            <input type="hidden" name="ProductId" value="@a.Product.ProductId">
+                            <button class="btn btn-danger">Delete</button>
+                            </form>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+        <div>
+            <h2>Add Product</h2>
+            <form asp-action="AddProduct" asp-controller="Home" method="post">
+                <input type="hidden" name="CatagoryId" value="@Model.CatagoryId">
+                <select name="ProductId" id="">
+                    @{
+                        foreach(Product p in ViewBag.AllProducts){
+                            bool hasPro = false;
+                            foreach(Association a in Model.Products){
+                                if(a.ProductId == p.ProductId){
+                                    hasPro = true;
+                                    break;
+                                }
+                            }
+                            if(!hasPro){
+                                <option value="@p.ProductId">@p.Name</option>
+                            }
+                        }
+                    }
+                </select> <br>
+                <button class="btn btn-primary mt-3">Add Product</button>
+            </form>
+        </div>
+    </div>
+</div>
