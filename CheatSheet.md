@@ -129,11 +129,62 @@ public class Post
     public User? Creator { get; set; }
 }
 
+## Many to Many example
+
+// using statements and namespace removed for brevity
+public class Magazine
+{    
+    [Key]
+    public int MagazineId { get; set; }    
+    public string Title { get; set; }  
+    // CreatedAt and UpdatedAt removed for brevity
+    // Our navigation property to our Subscription class
+    // Notice there is NO reference to the Person class   
+    public List<Subscription> Readers { get; set; } = new List<Subscription>();
+}
+
+// using statements and namespace removed for brevity
+public class Person
+{    
+    [Key]
+    public int PersonId { get; set; }    
+    public string Name { get; set; }  
+    // CreatedAt and UpdatedAt removed for brevity
+    // Our Person class also needs a reference to Subscriptions
+    // and contains NO reference to Magazines  
+    public List<Subscription> Subscriptions { get; set; } = new List<Subscription>();
+}
+
+// using statements and namespace removed for brevity
+public class Subscription
+{
+    [Key]    
+    public int SubscriptionId { get; set; } 
+    // The IDs linking to the adjoining tables   
+    public int PersonId { get; set; }    
+    public int MagazineId { get; set; }
+    // Our navigation properties - don't forget the ?    
+    public Person? Person { get; set; }    
+    public Magazine? Magazine { get; set; }
+}
+
+//Context file
+public DbSet<Person> People { get; set; } 
+public DbSet<Magazine> Magazines { get; set; } 
+public DbSet<Subscription> Subscriptions { get; set; } 
+
+
 ## .Include Linq
 
+using Microsoft.EntityFrameworkCore
 //.Include is like a MySql JOIN
 List<Post> AllPosts = _context.Posts.Include(c => c.Creator).ToList();
 int numPosts = _context.Users.Include(user => user.AllPosts).FirstOrDefault(user => user.UserId == userId).AllPosts.Count;
+
+## .ThenInclude() (Many2Many)
+
+Person personWithMags = _context.People.Include(subs => subs.Subscriptions).ThenInclude(sub => sub.Magazine).FirstOrDefault(person => person.PersonId == personId);
+
 
 ## Validate Unique Email
 
