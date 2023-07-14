@@ -16,6 +16,7 @@ public class HomeController : Controller
         db = context;
     }
 
+    //Render Create Products and Catagory Pages along with a list of all previously created
     public IActionResult Index()
     {
         List<Product> AllProducts = db.Products.ToList();
@@ -29,6 +30,7 @@ public class HomeController : Controller
         return View();
     }
 
+    //Create New Product/Catagory
     [HttpPost("products/create")]
     public IActionResult CreateProduct(Product newProduct){
         if(!ModelState.IsValid){
@@ -49,6 +51,7 @@ public class HomeController : Controller
         return RedirectToAction("Catagories");
     }
 
+    //View One Product/Catagory
     [HttpGet("view/{id}/product")]
     public IActionResult ViewProduct(int id){
         Product ProductWithCat = db.Products.Include(p=>p.Catagories).ThenInclude(c=>c.Catagory).FirstOrDefault(p=>p.ProductId == id);
@@ -57,18 +60,20 @@ public class HomeController : Controller
         return View("OneProduct",ProductWithCat);
     }
 
-    [HttpPost("product/addCatagory")]
-    public IActionResult AddCatagory(Association newAssociate){
-        db.Associations.Add(newAssociate);
-        db.SaveChanges();
-        return RedirectToAction("ViewProduct",new{id=newAssociate.ProductId});
-    }
     [HttpGet("view/{id}/catagory")]
     public IActionResult ViewCatagory(int id){
         Catagory CatagoryWithPro = db.Catagories.Include(p=>p.Products).ThenInclude(c=>c.Product).FirstOrDefault(p=>p.CatagoryId == id);
         List<Product> AllProducts = db.Products.ToList();
         ViewBag.AllProducts = AllProducts;
         return View("OneCatagory",CatagoryWithPro);
+    }
+
+    //Add Association from Product>Catagory and Catagory>Product
+    [HttpPost("product/addCatagory")]
+    public IActionResult AddCatagory(Association newAssociate){
+        db.Associations.Add(newAssociate);
+        db.SaveChanges();
+        return RedirectToAction("ViewProduct",new{id=newAssociate.ProductId});
     }
 
     [HttpPost("catagory/addProduct")]
@@ -78,6 +83,7 @@ public class HomeController : Controller
         return RedirectToAction("ViewCatagory",new{id=newAssociate.CatagoryId});
     }
 
+    //Delete Associations
     [HttpPost("association/delete/cat")]
     public IActionResult DeleteAssociationFromCat(Association newAsso){
         Association AssociationToDel = db.Associations.FirstOrDefault(a=> a.CatagoryId == newAsso.CatagoryId && a.ProductId == newAsso.ProductId);
@@ -85,6 +91,7 @@ public class HomeController : Controller
         db.SaveChanges();
         return RedirectToAction("ViewCatagory",new{id=newAsso.CatagoryId});
     }
+
     [HttpPost("association/delete/pro")]
     public IActionResult DeleteAssociationFromPro(Association newAsso){
         Association AssociationToDel = db.Associations.FirstOrDefault(a=> a.CatagoryId == newAsso.CatagoryId && a.ProductId == newAsso.ProductId);
