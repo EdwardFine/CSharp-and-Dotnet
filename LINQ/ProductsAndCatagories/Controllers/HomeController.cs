@@ -34,6 +34,8 @@ public class HomeController : Controller
     [HttpPost("products/create")]
     public IActionResult CreateProduct(Product newProduct){
         if(!ModelState.IsValid){
+            List<Product> AllProducts = db.Products.ToList();
+            ViewBag.AllProducts = AllProducts;
             return View("Index");
         }
         db.Products.Add(newProduct);
@@ -44,6 +46,8 @@ public class HomeController : Controller
     [HttpPost("catagories/create")]
     public IActionResult CreateCatagory(Catagory newCatagory){
         if(!ModelState.IsValid){
+            List<Catagory> AllCatagories = db.Catagories.ToList();
+            ViewBag.AllCatagories = AllCatagories;
             return View("Catagories");
         }
         db.Catagories.Add(newCatagory);

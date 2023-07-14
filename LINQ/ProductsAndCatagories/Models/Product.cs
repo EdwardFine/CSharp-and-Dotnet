@@ -10,7 +10,7 @@ public class Product{
     public string Name {get;set;}
     [Required]
     public float Price {get;set;}
-    public string Description {get;set;}
+    public string? Description {get;set;}
     public DateTime CreatedAt {get;set;} = DateTime.Now;
     public DateTime UpdatedAt {get;set;} = DateTime.Now;
     public List<Association> Catagories {get;set;} = new List<Association>();
