@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1>Wedding Planner</h1>
+    <div class="d-flex justify-content-evenly">
+        @await Html.PartialAsync("_RegisterForm")
+        @await Html.PartialAsync("_LoginForm")
+    </div>
+</div>

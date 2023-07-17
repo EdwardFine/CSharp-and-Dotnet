@@ -1,0 +1,35 @@
+<div class="d-flex justify-content-between align-items-center">
+    <h2>Welcome @ViewBag.User.FirstName!</h2>
+    <div class="d-flex" style="font-size: larger;gap:1em">
+        <form asp-action="Dashboard" asp-controller="Home"><button>Home</button></form> | 
+        <form asp-action="NewWedding" asp-controller="Home"><button>Plan a Wedding</button></form> | 
+        <form asp-action="Logout" asp-controller="Home"><button>Logout</button></form>
+    </div>
+</div>
+<hr>
+@model Wedding
+<h1>Plan a Wedding</h1>
+<form asp-action="CreateWedding" asp-controller="Home" style="width: max-content;" method="post">
+    <div class="mb-3 d-flex justify-content-between">
+        <label asp-for="Wedder1">Wedder One: </label>
+        <input asp-for="Wedder1"> <br>
+    </div>
+        <span asp-validation-for="Wedder1" class="text-danger font-weight-bold mb-3"></span>
+    <div class="mb-3 d-flex justify-content-between">
+        <label asp-for="Wedder2">Wedder Two: </label>
+        <input asp-for="Wedder2"> <br>
+    </div>
+        <span asp-validation-for="Wedder2" class="text-danger font-weight-bold mb-3"></span>
+    <div class="mb-3 d-flex justify-content-between">
+        <label asp-for="WeddingDate"> Date of Wedding: </label>
+        <input asp-for="WeddingDate">
+    </div>
+        <span asp-validation-for="WeddingDate" class="text-danger font-weight-bold mb-3"></span>
+    <div class="mb-3 d-flex justify-content-between">
+        <label asp-for="Address">Address: </label>
+        <input asp-for="Address"><br>
+    </div>
+        <span asp-validation-for="Address" class="text-danger font-weight-bold mb-3"></span>
+    <input type="hidden" name="UserId" value="@ViewBag.User.UserId">
+    <button class="btn btn-primary">Create Wedding</button>
+</form>
